@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Task Manager</title>
+  <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+  <!-- ── HEADER ──────────────────────────────────────── -->
+  <header>
+    <h1>Task<span>Manager</span></h1>
+    <button id="add-btn" onclick="openAdd()">+ Add Task</button>
+  </header>
+
+  <!-- ── STATS ────────────────────────────────────────── -->
+  <div class="stats">
+    <div class="stat-card total">
+      <div class="num" id="stat-total">0</div>
+      <div class="label">Total Tasks</div>
+    </div>
+    <div class="stat-card pending">
+      <div class="num" id="stat-pending">0</div>
+      <div class="label">Pending</div>
+    </div>
+    <div class="stat-card progress">
+      <div class="num" id="stat-progress">0</div>
+      <div class="label">In Progress</div>
+    </div>
+    <div class="stat-card completed">
+      <div class="num" id="stat-done">0</div>
+      <div class="label">Completed</div>
+    </div>
+  </div>
+
+  <!-- ── FILTERS ──────────────────────────────────────── -->
+  <div class="filters">
+    <input type="text" id="search" placeholder="🔍 Search tasks..."/>
+    <select id="filter-status">
+      <option value="">All Statuses</option>
+      <option value="pending">Pending</option>
+      <option value="in_progress">In Progress</option>
+      <option value="completed">Completed</option>
+    </select>
+    <select id="filter-priority">
+      <option value="">All Priorities</option>
+      <option value="high">High</option>
+      <option value="medium">Medium</option>
+      <option value="low">Low</option>
+    </select>
+  </div>
+
+  <!-- ── TASKS GRID ────────────────────────────────────── -->
+  <div class="tasks-grid" id="tasks-grid">
+    <div class="empty">
+      <div class="icon">⏳</div>
+      <p>Loading tasks...</p>
+    </div>
+  </div>
+
+  <!-- ── MODAL ────────────────────────────────────────── -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal">
+      <h2 id="modal-title">Add New Task</h2>
+      <form id="task-form">
+
+        <div class="form-group">
+          <label for="f-title">Task Title *</label>
+          <input type="text" id="f-title" placeholder="e.g. Complete math assignment" required/>
+        </div>
+
+        <div class="form-group">
+          <label for="f-description">Description</label>
+          <textarea id="f-description" placeholder="What exactly needs to be done?"></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-subject">Subject</label>
+            <input type="text" id="f-subject" placeholder="e.g. Mathematics"/>
+          </div>
+          <div class="form-group">
+            <label for="f-due-date">Due Date</label>
+            <input type="date" id="f-due-date"/>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="f-priority">Priority</label>
+            <select id="f-priority">
+              <option value="low">Low</option>
+              <option value="medium" selected>Medium</option>
+              <option value="high">High</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="f-status">Status</label>
+            <select id="f-status">
+              <option value="pending">Pending</option>
+              <option value="in_progress">In Progress</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-cancel" onclick="closeModal()">Cancel</button>
+          <button type="submit" class="btn-primary">Save Task</button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- ── TOAST ─────────────────────────────────────────── -->
+  <div class="toast" id="toast"></div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
