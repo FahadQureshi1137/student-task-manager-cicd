@@ -26,17 +26,26 @@
 #     ↓
 # Success or Failure
 
+#This is simply the name of the workflow you'll see in GitHub Actions.
 name: CI Pipeline
 
+#This tells GitHub when to run the workflow.
+#In plain English:
+#"Run this workflow whenever someone pushes code to main."
 on:
   push:
     branches:
       - main
-
+#This defines a job called test.
 jobs:
   test:
+    #This tells GitHub:
+    #"Run this job on an Ubuntu machine."
     runs-on: ubuntu-latest
-
+    #This tells GitHub Actions: Take the code from my GitHub repository and check it out onto the Ubuntu runner.
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Say Hello
         run: echo "CI Pipeline is working!"
