@@ -1,0 +1,42 @@
+# What is ci.yml?
+#
+# Think of ci.yml as an instruction sheet for GitHub.
+#
+# When GitHub sees:
+#
+# .github/workflows/ci.yml
+#
+# it knows:
+#
+# "This is a GitHub Actions workflow.
+# I need to read this file and execute the instructions inside it."
+#
+#
+# Our basic CI flow will be:
+#
+# Developer
+#     ↓
+# git push
+#     ↓
+# GitHub
+#     ↓
+# GitHub Actions
+#     ↓
+# Run our CI tasks
+#     ↓
+# Success or Failure
+
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Say Hello
+        run: echo "CI Pipeline is working!"
