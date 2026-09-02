@@ -45,11 +45,15 @@ jobs:
     #This tells GitHub Actions: Take the code from my GitHub repository and check it out onto the Ubuntu runner.
     steps:
       - name: Checkout code
+        #Use Means, Use an already-created GitHub Action instead of writing all the commands myself.
         uses: actions/checkout@v4
+      - name: Check PHP version
+        run: php --version
 
       - name: List project files
         #What does ls -la mean?
         #Show me the files and folders in the current directory.
+        #Run Means, Run this Linux/shell command on the GitHub Actions machine.
         run: ls -la
 
       - name: Say Hello
