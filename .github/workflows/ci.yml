@@ -78,10 +78,9 @@ jobs:
       # and check each one for syntax errors.
       - name: Check PHP syntax
         run: |
-        find . -type f -name "*.php" -exec php -l {} \;
+          find . -type f -name "*.php" -exec php -l {} \;
 
       - name: List project files
-        #What does ls -la mean?
-        #Show me the files and folders in the current directory.
-        #Run Means, Run this Linux/shell command on the GitHub Actions machine.
+        # Show me the files and folders in the current directory.
+        # Run means: run this Linux/shell command on the GitHub Actions machine.
         run: ls -la
