@@ -77,8 +77,8 @@ jobs:
       # Find every PHP file in the project
       # and check each one for syntax errors.
       - name: Check PHP syntax
-  run: |
-    find . -type f -name "*.php" -exec php -l {} \;
+        run: |
+        find . -type f -name "*.php" -exec php -l {} \;
 
       - name: List project files
         #What does ls -la mean?
