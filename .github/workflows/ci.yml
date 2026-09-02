@@ -47,6 +47,16 @@ jobs:
       - name: Checkout code
         #Use Means, Use an already-created GitHub Action instead of writing all the commands myself.
         uses: actions/checkout@v4
+
+        # Set up the PHP version required by our project
+      # instead of relying on the runner's default PHP version.
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+
+        ## Check which PHP version is currently available
+        # on the GitHub Actions Ubuntu runner.
       - name: Check PHP version
         run: php --version
 
