@@ -50,6 +50,7 @@ jobs:
 
         # Set up the PHP version required by our project
       # instead of relying on the runner's default PHP version.
+      # So even if GitHub's default PHP version changes in the future, your workflow still requests PHP 8.2.
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
@@ -59,6 +60,13 @@ jobs:
         # on the GitHub Actions Ubuntu runner.
       - name: Check PHP version
         run: php --version
+
+      # Check PHP files for syntax errors.
+      # -l means "lint" — PHP checks the syntax without executing the file.
+      - name: Check PHP syntax
+        run: |
+          php -l php/config.php
+          php -l php/tasks.php
 
       - name: List project files
         #What does ls -la mean?
