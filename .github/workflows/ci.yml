@@ -59,20 +59,29 @@ jobs:
         ## Check which PHP version is currently available
         # on the GitHub Actions Ubuntu runner.
       - name: Check PHP version
-        run: php --version
+        run:
+          php --version
 
-      # Check PHP files for syntax errors.
-      # -l means "lint" — PHP checks the syntax without executing the file.
+          # Check PHP files for syntax errors.
+      # The | allows us to run multiple commands
+      # inside the same run block.
+
+      # - name: Check PHP syntax
+      #   run: |
+      #     # Check the syntax of config.php without executing it.
+      #     php -l php/config.php
+
+      #     # Check the syntax of tasks.php without executing it.
+      #     php -l php/tasks.php
+
+      # Find every PHP file in the project
+      # and check each one for syntax errors.
       - name: Check PHP syntax
-        run: |
-          php -l php/config.php
-          php -l php/tasks.php
+  run: |
+    find . -type f -name "*.php" -exec php -l {} \;
 
       - name: List project files
         #What does ls -la mean?
         #Show me the files and folders in the current directory.
         #Run Means, Run this Linux/shell command on the GitHub Actions machine.
         run: ls -la
-
-      - name: Say Hello
-        run: echo "CI Pipeline is working!"
