@@ -45,7 +45,12 @@ jobs:
     #This tells GitHub Actions: Take the code from my GitHub repository and check it out onto the Ubuntu runner.
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      - name: List project files
+        #What does ls -la mean?
+        #Show me the files and folders in the current directory.
+        run: ls -la
 
       - name: Say Hello
         run: echo "CI Pipeline is working!"
