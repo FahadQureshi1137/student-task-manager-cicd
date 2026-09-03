@@ -41,7 +41,24 @@ jobs:
   test:
     #This tells GitHub:
     #"Run this job on an Ubuntu machine."
-    runs-on: ubuntu-latest
+    runs-on:
+      ubuntu-latest
+
+      # Start a temporary MySQL server for this CI job.
+    services:
+      mysql:
+        # Use the official MySQL 8.0 Docker image.
+        image: mysql:8.0
+
+        # Configure the MySQL server.
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: student_task_manager
+
+        # Make MySQL available on port 3306.
+        ports:
+          - 3306:3306
+
     #This tells GitHub Actions: Take the code from my GitHub repository and check it out onto the Ubuntu runner.
     steps:
       - name: Checkout code
