@@ -80,6 +80,12 @@ jobs:
         run: |
           find . -type f -name "*.php" -exec php -l {} \;
 
+            # Run our PHP test file.
+      # If the test passes, the command exits with status 0.
+      # If the test fails, exit(1) makes the CI step fail.
+      - name: Run PHP test
+        run: php tests/test.php
+
       - name: List project files
         # Show me the files and folders in the current directory.
         # Run means: run this Linux/shell command on the GitHub Actions machine.
