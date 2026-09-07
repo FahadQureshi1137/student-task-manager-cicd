@@ -41,16 +41,15 @@ jobs:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: student_task_manager
 
-        # Make MySQL available on port 3306.
         ports:
           - 3306:3306
 
-        # Check whether MySQL is ready to accept connections.
-        healthcheck:
-          test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-          timeout: 5s
-          retries: 10
-          interval: 5s
+        # Tell Docker to check whether MySQL is ready.
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=10
 
     # These are the commands/actions executed inside the job.
     steps:
