@@ -93,23 +93,20 @@ jobs:
           echo "MySQL connection successful!";
           '
 
-      # Show the files and folders in the current directory.
-      - name: List project files
-        run: ls -la
-
-      # Log in to Docker Hub using the credentials
+            # Log in to Docker Hub using the credentials
       # stored securely in GitHub repository secrets.
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
-        username: ${{ secrets.DOCKERHUB_USERNAME }}
-        password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       # Build the Docker image from our Dockerfile.
       - name: Build Docker image
         run: |
           docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/student-task-manager:latest .
-            # Push the Docker image to Docker Hub.
+
+      # Push the Docker image to Docker Hub.
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/student-task-manager:latest
