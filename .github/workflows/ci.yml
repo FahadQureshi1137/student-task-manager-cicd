@@ -93,7 +93,7 @@ jobs:
           echo "MySQL connection successful!";
           '
 
-            # Log in to Docker Hub using the credentials
+      # Log in to Docker Hub using the credentials
       # stored securely in GitHub repository secrets.
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
@@ -110,3 +110,19 @@ jobs:
       - name: Push Docker image
         run: |
           docker push ${{ secrets.DOCKERHUB_USERNAME }}/student-task-manager:latest
+
+      # Deploy the latest Docker image to our EC2 server.
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USERNAME }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            docker pull fahadf5/student-task-manager:latest
+            docker stop student-task-manager-app || true
+            docker rm student-task-manager-app || true
+            docker run -d \
+              --name student-task-manager-app \
+              -p 8081:80 \
+              fahadf5/student-task-manager:latest
